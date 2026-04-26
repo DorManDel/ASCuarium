@@ -1,13 +1,50 @@
 /* =========================================================
-   🌊 DORUTILS ASCII AQUARIUM BG — SCRIPT
+   🧠 SCRIPT MAP / HOW THIS FILE IS BUILT 🗺️
    =========================================================
 
-   What changed from the framed version:
-   1. No card/frame logic.
-   2. Everything is injected into a full-screen stage.
-   3. Fish now have depth values: 1 to 5.
-   4. Depth controls color, opacity, size, blur and layer order.
-   5. Settings popup exists visually and opens/closes.
+   01. DOM REFERENCES
+       Gets HTML elements by id.
+       Example: settings panel, sliders, aquarium container.
+
+   02. DEFAULT SETTINGS
+       One object that controls the default aquarium values.
+       If you want to change startup values, change them here.
+
+   03. ASCII ART LIBRARY
+       Stores all creature and plant ASCII drawings.
+
+   04. FISH ARSENAL
+       List of fish types.
+       Each fish has name, art, color, behavior and direction info.
+
+   05. HELPERS
+       Small reusable functions:
+       random numbers, random picker, clear generated objects.
+
+   06. DEPTH / COLOR LOGIC
+       Decides how far/close fish look and changes water tone.
+
+   07. ASCII ELEMENT FACTORY
+       Creates <pre> elements and places them in the aquarium.
+
+   08. FISH MANAGER
+       Creates fish from the arsenal and controls fish behavior.
+
+   09. SEAWEED MANAGER
+       Creates plants, seaweed and bottom decorations.
+
+   10. BUBBLE MANAGER
+       Creates animated bubbles.
+
+   11. RENDER ENGINE
+       Clears old objects and regenerates the full aquarium.
+
+   12. SETTINGS EVENTS
+       Handles popup open/close, sliders, apply/reset buttons.
+
+   13. PROJECT START
+       Updates labels and renders the first aquarium.
+
    ========================================================= */
 
 /* 01. DOM REFERENCES */
@@ -28,7 +65,7 @@ const ASCII = {
 <========(  )><
           \\/
           `,
-          swordfish:`
+  swordfish: `
                                                 
              %%%                      
              %%                       
@@ -44,11 +81,11 @@ const ASCII = {
                           
                             @@
 @@                        @@   @
-@@@@                      @     @
+@  @                      @     @
  @  @                     @@     @
  @   @                   @        @@@@@@@
  @   @@                 @                   @@@
-@@    @@     @@@@@@@@@@@                       @ @@@@@
+  @    @@     @@@@@@@@@@@                       @ @@@@@
         @@@@@                                        @@@
   @@                                        @@@@@ +%      @@
   @@ @@@@@@@@                              @ @@@            %
@@ -84,6 +121,9 @@ const ASCII = {
   { art: ASCII.fishBlue, classes: "tint-blue swim-left", top: "12vh", duration: "39s", delay: "-2s", depth: 2 },
   { art: ASCII.fishTiny, classes: "tint-pink swim-right", top: "59vh", duration: "26s", delay: "-17s", depth: 4 }
 ];
+
+*/
+
 
 /* =========================================================
    04. PLANT DATA
@@ -179,6 +219,16 @@ function closeSettingsPanel() {
 
 settingsToggle.addEventListener("click", openSettings);
 closeSettings.addEventListener("click", closeSettingsPanel);
+
+/* Close on pressing outside popup */
+document.addEventListener("click", (event) => {
+  const clickedInsidePanel = settingsPanel.contains(event.target);
+  const clickedSettingsButton = settingsToggle.contains(event.target);
+
+  if (!clickedInsidePanel && !clickedSettingsButton) {
+    closeSettingsPanel();
+  }
+});
 
 /* =========================================================
    10. RENDER AQUARIUM
