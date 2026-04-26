@@ -60,7 +60,7 @@ dorutils_ascii_aquarium_bg/
 <details>
 
 ### Option 1 — Open Link from Github - as HTML page
-![link]https://dormandel.github.io/ASCuarium/
+<a href="https://dormandel.github.io/ASCuarium/">🪸🫧 Live Git Demo 🫧🐠</a>
 
 ### Option 2 — Open directly
 
@@ -249,7 +249,11 @@ Increase the slider in the settings panel, or change the default value in `index
 
 ---
 
+
+
 ## 🧪 Common Problems ⚠️
+
+<details>
 
 ### Blank blue page 🟦
 
@@ -278,6 +282,8 @@ missing before array items, or unclosed template strings.
 ### Settings opens but sliders do nothing
 
 Click **Apply** after changing sliders.
+
+</details>
 
 ---
 
