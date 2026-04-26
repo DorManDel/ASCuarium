@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Dor's ASCII Aquarium 🐠🫧 </title>
+
+  <!-- Connect external CSS file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- =========================================================
+       PART 01: FULL PAGE AQUARIUM BACKGROUND
+       ---------------------------------------------------------
+       No wrapper. No frame. No card.
+       The aquarium itself becomes the whole page background.
+       ========================================================= -->
+  <section id="aquarium" class="aquarium" aria-label="Full page animated ASCII aquarium">
+    <!-- JS injects fish, shark, swordfish, bubbles and seaweed here. -->
+  </section>
+
+  <!-- =========================================================
+       PART 02: SETTINGS BUTTON
+       ---------------------------------------------------------
+       This is only the visual placeholder for now.
+       Later we connect the sliders to real settings.
+       ========================================================= -->
+  <button id="settingsToggle" class="settings-toggle" type="button">
+    ⚙ Settings
+  </button>
+
+  <!-- =========================================================
+       PART 03: SETTINGS POPUP / CONTROL PANEL
+       ---------------------------------------------------------
+       Future controls:
+       - number of fish
+       - depth strength
+       - bubble amount
+       - base water color
+       - speed multiplier
+       ========================================================= -->
+  <aside id="settingsPanel" class="settings-panel" aria-label="Aquarium settings panel">
+    <div class="settings-header">
+      <h2>Aquarium Settings</h2>
+      <button id="closeSettings" class="close-btn" type="button">×</button>
+    </div>
+
+    <label class="control-row">
+      Fish Amount
+      <input id="fishAmount" type="range" min="1" max="30" value="10" />
+    </label>
+
+    <label class="control-row">
+      Depth Strength
+      <input id="depthStrength" type="range" min="0" max="100" value="55" />
+    </label>
+
+    <label class="control-row">
+      Bubble Amount
+      <input id="bubbleAmount" type="range" min="5" max="80" value="28" />
+    </label>
+
+    <label class="control-row">
+      Speed
+      <input id="speedControl" type="range" min="1" max="100" value="50" />
+    </label>
+
+    <p class="settings-note">
+      Sliders are prepared for the next step. Right now the popup opens/closes only.
+</html>
