@@ -301,5 +301,5 @@ Click **Apply** after changing sliders.
 Created by **Dor Mandel** as part of the DorUtils visual background experiments.
 
 ```txt
-Made with pure HTML + CSS + JS + ASCII.
+Made with : HTML + CSS + JS + ASCII.
 ```
