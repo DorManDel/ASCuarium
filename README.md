@@ -89,6 +89,7 @@ Alternative:
 python3 -m http.server 5500
 ```
 </details>
+
 ---
 
 ## 🧠 How It Works
@@ -176,6 +177,7 @@ The settings popup currently controls:
 | Water Tone | Background water brightness/tone |
 
 </details>
+
 ---
 
 ## 🎨 Depth System 🔵
@@ -191,6 +193,7 @@ The settings popup currently controls:
 | `depth-5` | Very close | Bright, larger, glowing |
 
 </details>
+
 ---
 
 ## 🧩 Add Another Fish 🐠
