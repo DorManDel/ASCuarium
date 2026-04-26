@@ -19,9 +19,11 @@
 ## 📸 Preview 
 ![Demo🐠🫧🪸🦈🌊](images/demo.gif)
 
+<details>
 <p align="center">
   <img src="images/image.png" alt="ASCuarium Preview" width="800">
 </p>
+</details>
 
 ---
 
