@@ -168,6 +168,15 @@ const fishBlueprints = [
 
 <details>
 
+## 🎮 Controls
+
+Open settings ⚙️ to control:
+
+- Fish count
+- Bubble amount
+- Speed
+- Depth color
+
 The settings popup currently controls:
 
 | Slider | What it controls |
