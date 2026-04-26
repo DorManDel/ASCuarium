@@ -20,17 +20,17 @@
 
 ## ✨ Features
 
-| Feature | Status | Description |
-|---|---:|---|
-| Full-page aquarium | ✅ | No frame, no wrapper, no card. The aquarium fills the entire screen. |
-| Animated ASCII fish | ✅ | Fish are generated dynamically with JavaScript. |
-| Shark | ✅ | Large ASCII shark moving in the background. |
-| Swordfish | ✅ | Long-nose swordfish included in the fish system. |
-| Bubbles | ✅ | Random bubbles rise from the bottom of the page. |
-| Seaweed | ✅ | Animated bottom plants with gentle sway. |
-| Depth system | ✅ | Fish use `depth-1` to `depth-5` for z-axis feeling. |
-| Settings popup | ✅ | Sliders control fish amount, bubbles, speed, depth and water tone. |
-| Modular files | ✅ | Split into `index.html`, `style.css`, and `script.js`. |
+| Feature | icon|Status | Description |
+|---|---:|---:|---|
+| Full-page aquarium |🌊| ✅ | No frame, no wrapper, no card. The aquarium fills the entire screen. |
+| Animated ASCII fish |🐠| ✅ | Fish are generated dynamically with JavaScript. |
+| Shark |🦈| ✅ | Large ASCII shark moving in the background. |
+| Swordfish |⚔️| ✅ | Long-nose swordfish included in the fish system. |
+| Bubbles |🫧| ✅ | Random bubbles rise from the bottom of the page. |
+| Seaweed |🪸| ✅ | Animated bottom plants with gentle sway. |
+| Depth system |🔵| ✅ | Fish use `depth-1` to `depth-5` for z-axis feeling. |
+| Settings popup |🍿⬆️| ✅ | Sliders control fish amount, bubbles, speed, depth and water tone. |
+| Modular files |📂| ✅ | Split into `index.html`, `style.css`, and `script.js`. |
 
 ---
 
