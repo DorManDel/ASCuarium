@@ -82,10 +82,20 @@ function saveUserSettings() {
     seaweedAmount: seaweedAmountInput.value,
     depthStrength: depthStrengthInput.value,
     speed: speedControlInput.value,
-    waterTone: waterToneInput.value
+    waterTone: waterToneInput.value,
+    enabledFishIndexes: getEnabledFishIndexes()
   };
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+}
+
+/* FISH TOGGLE PREFS:
+   Saves which fish checkboxes are enabled.
+   Stored as array of fish indexes.
+*/
+function getEnabledFishIndexes() {
+  return [...document.querySelectorAll(".fish-toggle:checked")]
+    .map((box) => Number(box.value));
 }
 
 function loadUserSettings() {
@@ -138,6 +148,7 @@ const ASCII = {
    |_\\
   |>(_')
     |_/`,
+  tigerFish: `><((≋º>`,
   tunaFish: `
       ___.-*"\\
     (     -((( *>
@@ -426,6 +437,24 @@ function renderFishToggleList() {
     `;
 
     fishToggleList.appendChild(row);
+    /* Save Prefs immediately when checkbox changes */
+    row.querySelector(".fish-toggle").addEventListener("change", () => {
+      saveUserSettings();
+      renderAquarium();
+    });
+  });
+}
+
+/* LOAD FISH TOGGLE PREFS:
+   After checkbox UI is created, this restores checked/unchecked state.
+*/
+function loadFishTogglePrefs() {
+  const savedSettings = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+  if (!savedSettings || !savedSettings.enabledFishIndexes) return;
+
+  document.querySelectorAll(".fish-toggle").forEach((box) => {
+    box.checked = savedSettings.enabledFishIndexes.includes(Number(box.value));
   });
 }
 
@@ -815,4 +844,5 @@ resetSettings.addEventListener("click", resetToDefaults);
 loadUserSettings();
 updateValueLabels();
 renderFishToggleList();
+loadFishTogglePrefs();
 renderAquarium();
