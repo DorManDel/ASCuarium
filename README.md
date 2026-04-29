@@ -277,7 +277,6 @@ Increase the slider in the settings panel, or change the default value in `index
 
 ---
 
-
 ## 🧪 Common Problems ⚠️
 
 <details>
@@ -314,6 +313,140 @@ Click **Apply** after changing sliders.
 
 ---
 
+
+## 🧪 Bugs, Fixes & Lessons Learned
+
+<details>
+
+<summary>🛠️ Real issues encountered during development</summary>
+
+---
+
+### 🐟 Fish teleporting mid-screen
+
+**Problem:**  
+Fish would disappear and reappear before exiting the screen.
+
+**Cause:**  
+CSS animation loop resets before fish is fully off-screen.
+
+**Fix:**  
+Increase animation travel distance:
+
+```css
+transform: translateX(-2000px) → translateX(100vw + 2000px)
+```
+---
+
+### 🐡 Puffer fish breaking layout
+
+**Problem:**
+Puffer scaling caused disappearance / glitching.
+
+**Cause:**
+CSS transform: scale() conflicts with animation transforms.
+
+**Fix:**
+Use ASCII swap instead of scale.
+
+---
+
+
+### 🎨 ASCII distortion
+
+**Problem:**
+Fish shapes looked broken or uneven.
+
+**Cause:**
+Font rendering + CSS transforms affecting spacing.
+
+**Fix:**
+```css
+font-variant-ligatures: none;
+letter-spacing: 0;
+```
+
+---
+
+### 🧠 Settings not persisting
+
+**Problem:**
+Sliders worked but reset on refresh.
+
+**Fix:**
+Added localStorage 💾 system.
+
+---
+
+
+### 🐠 Direction issues
+
+**Problem:**
+Fish appeared flipped randomly.
+
+**Cause:**
+Conflict between:
+
+```css
+CSS scaleX(-1)
+JS face logic
+```
+
+**Fix:**
+Unified direction system (still evolving).
+
+---
+
+
+### 🌿 Coral inconsistency
+
+**Problem:**
+Sometimes no coral appeared.
+
+**Fix:**
+Force spawn of at least 2 corals.
+
+---
+
+### 🎚️ Slider Adding with saved prefs
+
+**template:**
+```HTML
+1. HTML
+   Add label + input + value span.
+
+2. JS DOM refs
+   const xyzInput = document.getElementById("xyz");
+   const xyzValue = document.getElementById("xyzValue");
+
+3. DEFAULT_SETTINGS
+   xyz: defaultValue,
+
+4. saveUserSettings()
+   xyz: xyzInput.value,
+
+5. loadUserSettings()
+   xyzInput.value = savedSettings.xyz ?? DEFAULT_SETTINGS.xyz;
+
+6. resetToDefaults()
+   xyzInput.value = DEFAULT_SETTINGS.xyz;
+
+7. updateValueLabels()
+   xyzValue.textContent = xyzInput.value;
+
+8. input listener array
+   xyzInput,
+
+9. render/use logic
+   Use Number(xyzInput.value) wherever needed.
+```
+
+---
+
+</details>
+
+
+
 ## 🛠️ Built With 🏗️
 
 | Technology | Usage |
@@ -325,11 +458,6 @@ Click **Apply** after changing sliders.
 
 ---
 
-<details>
-
----
-
----
 
 ## 🧠 Developer Notes — How ASCuarium Works
 
@@ -632,16 +760,17 @@ Just fish.
 
 ## 📌 Roadmap 🗺️
 
+- [ ] Fix direction system fully
+- [ ] Add tigerfish
+- [ ] Make fish feel alive: straight / wave / drift / zigzag
+- [ ] Add theme modes
+- [ ] Add interactions
+- [ ] Turn into embeddable widget / wallpaper mode
 - [ ] Add pause/play button
 - [ ] Add color picker for water
-- [ ] Add separate fish color controls
 - [ ] Add fish speed per depth
 - [ ] Add food particles
-- [ ] Add mouse interaction
-- [ ] Add click-to-spawn fish
-- [ ] Add DorUtils homepage content overlay
-- [v] Add localStorage to save settings
-- [ ] Add theme presets
+- [x] Add localStorage to save settings
 
 ---
 

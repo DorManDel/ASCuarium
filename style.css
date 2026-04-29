@@ -14,11 +14,51 @@
    06. Settings popup
 
    ========================================================= */
+/* #region 01. GLOBAL RESET */
+/* existing reset code */
+/* #endregion */
 
+/* #region 02. FULL PAGE AQUARIUM */
+/* .aquarium, ::before, ::after */
+/* #endregion */
+
+/* #region 03. ASCII BASE + LIVING FISH */
+/* .ascii, puffer, ascii-creature */
+/* #endregion */
+
+/* #region 04. DEPTH LAYERS */
+/* depth-1 to depth-5 */
+/* #endregion */
+
+/* #region 05. COLOR TINTS */
+/* tint classes */
+/* #endregion */
+
+/* #region 06. MOVEMENT ANIMATIONS */
+/* swim-right, swim-left, pufferPulse */
+/* #endregion */
+
+/* #region 07. BUBBLES */
+/* bubble styles */
+/* #endregion */
+
+/* #region 08. SEAWEED + SAND */
+/* seaweed, coral, sand */
+/* #endregion */
+
+/* #region 09. SETTINGS POPUP */
+/* settings panel, controls, fish picker, sectors */
+/* #endregion */
+
+/* #region 10. RESPONSIVE */
+/* media queries */
+/* #endregion */
 
 /* =========================================================
    01. GLOBAL RESET
    ========================================================= */
+/* #region 01. GLOBAL RESET */
+/* existing reset code */
 
 * {
   box-sizing: border-box;
@@ -38,6 +78,7 @@ body {
   background: #061522;
 }
 
+/* #endregion */
 
 /* =========================================================
    02. FULL PAGE AQUARIUM
@@ -112,6 +153,10 @@ body {
   pointer-events: none;
   text-shadow: 0 0 8px currentColor;
   will-change: transform;
+
+  /* Should Fix Broken ASCII alignments */
+  font-variant-ligatures: none;
+  letter-spacing: 0;
 }
 
 /*  CLICKABLE FISHES INTERACTION  ( PUFFERFISH )  */
@@ -153,6 +198,67 @@ click -> POP! + returns normal*/
   }
 }
 
+/* ADDED LIVING FISH PROTOTYPE */
+.ascii-creature {
+  position: absolute;
+  white-space: pre;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 0 12px currentColor;
+  will-change: transform;
+  z-index: 45;
+}
+
+.ascii-creature pre {
+  margin: 0;
+}
+
+.creature-body {
+  position: relative;
+  font-size: 22px;
+}
+
+.creature-trail {
+  position: absolute;
+  left: -42px;
+  top: 3px;
+  opacity: 0.35;
+  font-size: 16px;
+  animation: trail-fade 1.2s infinite alternate;
+}
+
+.creature-fin {
+  position: absolute;
+  left: 42px;
+  top: 15px;
+  font-size: 16px;
+  animation: fin-wiggle 0.45s infinite alternate;
+}
+
+.creature-eye {
+  position: absolute;
+  left: 62px;
+  top: 1px;
+  font-size: 12px;
+  animation: eye-blink 4s infinite;
+}
+
+
+@keyframes fin-wiggle {
+  from { transform: rotate(-18deg); }
+  to   { transform: rotate(18deg); }
+}
+
+@keyframes eye-blink {
+  0%, 94%, 100% { opacity: 1; }
+  96% { opacity: 0; }
+}
+
+@keyframes trail-fade {
+  from { opacity: 0.15; transform: translateX(0); }
+  to   { opacity: 0.45; transform: translateX(-6px); }
+}
 
 /* =========================================================
    04. DEPTH LAYERS
@@ -269,24 +375,15 @@ click -> POP! + returns normal*/
   animation-iteration-count: infinite;
 }
 
+/*  Better movement - fix dis/Appearing mid screen  */
 @keyframes swim-right {
-  from {
-    transform: translateX(-1200px);
-  }
-
-  to {
-    transform: translateX(calc(100vw + 1200px));
-  }
+  from { transform: translateX(-2000px); }
+  to   { transform: translateX(calc(100vw + 2000px)); }
 }
 
 @keyframes swim-left {
-  from {
-    transform: translateX(calc(100vw + 1200px)) scaleX(-1);
-  }
-
-  to {
-    transform: translateX(-1200px) scaleX(-1);
-  }
+  from { transform: translateX(calc(100vw + 2000px)) scaleX(-1); }
+  to   { transform: translateX(-2000px) scaleX(-1); }
 }
 
 /* PUFFER FISH ANIMATIONS */
@@ -605,6 +702,20 @@ click -> POP! + returns normal*/
   font-size: 0.75rem;
   line-height: 1;
   white-space: pre;
+}
+
+.settings-sector {
+  margin: 14px 0;
+  padding: 10px;
+  border: 1px solid rgba(190, 240, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.settings-sector summary {
+  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 
