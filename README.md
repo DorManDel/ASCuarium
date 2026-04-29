@@ -1,16 +1,32 @@
-<h1 align="center">🐠 ASCuarium</h1>
-<p align="center">Animated ASCII Ocean for the Browser</p>
+<!--
+![Stars](https://img.shields.io/github/stars/user/repo)
+![License](https://img.shields.io/badge/license-MIT-blue)
+-->
+
+<h1 align="center" style="color:yellow">🐠 ASCuarium</h1>
+<p align="center"> <strong>A serious engine for unserious fish.</strong> </p>
+
 
 <p align="center">
-<a href="https://dormandel.github.io/ASCuarium/">🌐 Live Demo</a> •
+<a href="https://dormandel.github.io/ASCuarium/">🌐 Live Demo</a> 
+ • 
 <a href="https://github.com/DorManDel/ASCuarium">📦 Repo</a>
 </p>
 
+<!-- Sheilds and Icons : -->
 <p align="center">
-  <strong>A full-page animated ASCII aquarium background made with HTML, CSS, and JavaScript.</strong>
+  <img src="https://img.shields.io/github/stars/DorManDel/ASCuarium?style=for-the-badge"/>
+  <img src="https://img.shields.io/github/last-commit/DorManDel/ASCuarium?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/ASCII-POWER-blueviolet?style=for-the-badge"/>
 </p>
 
-<p align="center">
+<!-- 
+<p align="center"> 
+  <summary align="center" style="color:grey">A full-page animated ASCII aquarium background made with HTML, CSS, and JavaScript.</summary>
+</p>
+-->
+
+<p align="center" style="color:cyan">
   🐠 Fish &nbsp; • &nbsp; 🦈 Shark &nbsp; • &nbsp; ⚔️ Swordfish &nbsp; • &nbsp; 🫧 Bubbles &nbsp; • &nbsp; 🌿 Seaweed &nbsp; • &nbsp; ⚙️ Settings Panel
 </p>
 
@@ -19,9 +35,21 @@
 ## 📸 Preview 
 ![Demo🐠🫧🪸🦈🌊](images/demo.gif)
 
-<details>
+<details style="color:grey">
 <p align="center">
+  <p align="center"> 
+  A full-page animated ASCII aquarium background made with HTML, CSS, and JavaScript.
+  </p>
+  <img src="images/demo-1.gif" alt="ASCuarium GIF Preview" width="800">
+  <p align="center"> 
+  📌 Popping a Puffer Fish on mouse Click! 🐡
+  </p>
+  <img src="images/demo-pop.gif" alt="ASCuarium GIF Preview" width="800">
+  <p align="center"> 
+  image of the ASCII-quarium v1.0.0 showing broken Hammerfish
+  </p>
   <img src="images/image.png" alt="ASCuarium Preview" width="800">
+
 </p>
 </details>
 
@@ -250,7 +278,6 @@ Increase the slider in the settings panel, or change the default value in `index
 ---
 
 
-
 ## 🧪 Common Problems ⚠️
 
 <details>
@@ -298,6 +325,311 @@ Click **Apply** after changing sliders.
 
 ---
 
+<details>
+
+---
+
+---
+
+## 🧠 Developer Notes — How ASCuarium Works
+
+<details>
+
+<summary style="color:grey">  🐠 Open the engine breakdown  </summary>
+
+ASCuarium is built like a tiny browser-based aquarium engine.
+
+It looks silly, but the structure is real:
+
+```txt
+HTML  → creates the stage and settings panel
+CSS   → controls visuals, movement, depth, glow and popup styling
+JS    → creates fish, bubbles, seaweed, sand, settings and saved preferences
+🧱 Core Idea
+```
+The aquarium does not contain fish directly in the HTML.
+
+Instead, JavaScript creates them dynamically:
+```bash
+const element = document.createElement("pre");
+element.textContent = config.art.trim();
+aquarium.appendChild(element);
+```
+Each creature is a <'pre'> element so ASCII spacing is preserved.
+
+## 🐟 ASCII Library
+
+The ASCII object stores all visual drawings:
+```bash
+const ASCII = {
+  fishSmall: `><(((º>`,
+  pufferFish: `><(((●)>`,
+  seaweedA: `...`
+};
+```
+
+This keeps the art separate from the logic.
+
+### * Question❔: Why this is useful?
+
+### * Answer 🅰️: If I want to change a fish, I only edit the ASCII art once.
+
+## 🧬 Fish Arsenal
+
+fishArsenal is the fish database.
+
+Each fish has:
+```bash
+{
+  name: "Puffer Fish",
+  art: ASCII.pufferFish,
+  tint: "tint-orange",
+  face: "right",
+  behavior: "puffer"
+}
+```
+| Command #   |   Explaination ?                  |
+|---      |                                    ---|
+|Property |	Meaning                               |
+|name     |	 Display name in the settings panel   |     
+|art	    |   Which ASCII drawing to use          |
+|tint     |	CSS color class                       |
+|face     |	Natural direction of the fish         |
+|behavior	|Special logic such as puffer behavior  |
+
+
+## 🎲 Fish Manager
+
+#### FishManager controls fish spawning.
+
+It decides:
+- [x] Which fish to create
+- [x] Which direction it swims
+- [x] Whether it needs to flip
+- [x] What depth it belongs to
+- [x] How fast it moves
+
+Simple idea:
+
+```Pick fish``` → ```pick direction``` → ```apply classes``` → ```create element```
+
+## 🔁 Render Engine
+
+#### renderAquarium() rebuilds the aquarium.
+
+```c++
+function renderAquarium() {
+  clearGeneratedElements();
+  applyWaterTone();
+
+  FishManager.createSchool(fishAmount);
+  FishManager.createShark();
+  FishManager.createSpecificFish("Puffer Fish");
+  SeaweedManager.createSeaweedField();
+
+  createSandPatch();
+  createBubble();
+}
+```
+Simple explanation :
+
+```txt
+Every time settings are applied, the old generated objects are removed and a new aquarium is created.
+```
+
+### Expert explanation :
+
+```
+This is a basic render pipeline.
+The aquarium state is regenerated from current UI settings.
+```
+
+## 🌊 Depth System
+
+Fish get a class from:
+```
+depth-1
+depth-2
+depth-3
+depth-4
+depth-5
+```
+
+#### Each depth changes:
+
+```
+-- opacity
+-- size
+-- blur
+-- glow
+-- z-index
+```
+
+This creates fake 3D depth using only CSS.
+
+## 🫧 Bubble System
+
+Bubbles are simple <span> elements.
+
+Each bubble gets random:
+
+```
+- size
+- horizontal position
+- animation duration
+- delay
+- opacity
+```
+#### This makes the aquarium feel alive without complex logic.
+
+## 🌿 Seaweed Manager
+
+- Seaweed is generated like fish, but stays near the bottom.
+
+Each plant has:
+```HTML
+{
+  name: "Tall Seaweed",
+  art: ASCII.seaweedTall,
+  className: "seaweed-tall"
+}
+```
+CSS handles the sway animation.
+
+## ⚙️ Settings Panel
+
+### The settings panel controls:
+```
+[+] Setting	What it changes
+[+] Fish Amount	Number of fish
+[+] Fish Variety	How many fish types are allowed
+[+] Bubble Amount	Number of bubbles
+[+] Seaweed Amount	Number of plants
+[+] Depth Strength	How much depth variation exists
+[+] Speed	Animation speed
+[+] Water Tone	Ocean brightness
+[+] 💾 localStorage
+```
+ASCuarium saves settings using:
+
+```HTML
+localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+```
+
+*** This means preferences stay after refresh. ***
+
+Used for:
+
+```
+[📌] slider values
+[📌] fish amount
+[📌] speed
+[📌] depth
+[📌] water tone
+[📌] selected fish types
+[📌] ☑️ Fish Picker
+```
+The fish picker is generated from fishArsenal.
+
+That means adding a fish automatically makes it appear in the settings list.
+```
+Add fish to fishArsenal
+↓
+Settings panel gets checkbox
+↓
+Fish can be toggled on/off
+🧨 Puffer Fish Mechanic
+```
+
+The puffer fish has special behavior.
+
+
+Normal:
+<p style=color:orange>
+`
+><(((●)>
+`
+
+Puffed:
+
+```
+
+           @% :%
+          #    .#%%%%%%%%%%%@@
+  @@     %   %%#              %%@
+ @   %%  @%%%  %%#      .%@@     %@
+ @    %%%     %%  =%   ..@@=     %@
+@             %%             %%%%%%@
+%     ....    .#  -%               %
+ @%   %@%%      #*                 %
+  %*@    %                       :@
+          %.                    -@
+           @%                  %@
+             @%%@          %%%@
+                @@%%%%%%%%@
+
+```
+
+#### Mechanic:
+```
+spawn normally
+wait random time
+become puffed
+click while puffed
+POP!
+return to normal
+```
+
+This is done by swapping the fish text content.
+
+### 🎨 CSS Tricks Used :
+
+```txt
+-Trick-	                  -Purpose-
+- - position:             fixed	Full-screen aquarium
+- radial-gradient	      Ocean lighting
+- linear-gradient	      Water depth
+- text-shadow	ASCII     glow
+- filter: blur()	      Far depth effect
+- z-index	              Layer ordering
+- animation-delay	      Random movement timing
+- white-space:            pre	Preserve ASCII formatting
+- <details>	              Expandable settings section
+- localStorage	          Save preferences
+```
+
+## 🧪 Main Lessons :
+
+This project teaches:
+
+```
+DOM manipulation
+data-driven design
+CSS animation
+localStorage
+UI controls
+random generation
+separation of concerns
+render pipelines
+debugging visual systems
+turning nonsense into architecture
+🧃 Philosophy
+```
+
+
+# This project has no reason to exist.
+
+<p align=right style=color:red>
+ That is exactly why it should exist.
+</p>
+
+ASCuarium is a chill experiment in making something fun, weird, visual, and expandable.
+
+No pressure.
+No product pitch.
+Just fish.
+
+
 ## 📌 Roadmap 🗺️
 
 - [ ] Add pause/play button
@@ -308,15 +640,15 @@ Click **Apply** after changing sliders.
 - [ ] Add mouse interaction
 - [ ] Add click-to-spawn fish
 - [ ] Add DorUtils homepage content overlay
-- [ ] Add localStorage to save settings
+- [v] Add localStorage to save settings
 - [ ] Add theme presets
 
 ---
 
 ##  💳 Credits 🪪
 
-Created by **Dor Mandel** as part of the DorUtils visual background experiments.
-
 ```txt
+Created by **Dor Mandel** as part of the DorUtils visual background experiments.
+---
 Made with : HTML + CSS + JS + ASCII.
 ```
