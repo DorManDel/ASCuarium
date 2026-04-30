@@ -36,7 +36,7 @@
       </button>
     </div>
 
-    <details open>
+    <details id="fishSettingsSection" open>
       <summary>🐠 Fish</summary>
       <!-- fish controls -->
 
@@ -69,13 +69,6 @@
         </label>
       </details>
 
-      <!-- Shark Slider -->
-      <label class="control-row">
-        Shark Amount
-        <input id="sharkAmount" type="range" min="0" max="5" value="1" />
-        <span id="sharkAmountValue" class="value-pill">1</span>
-      </label>
-
       <details class="fish-picker">
         <summary>🐠 Choose Fish Types</summary>
 
@@ -84,16 +77,24 @@
         </div>
       </details>
 
+      <!-- Shark Slider -->
+      <label class="control-row">
+        Shark Amount
+        <input id="sharkAmount" type="range" min="0" max="5" value="1" />
+        <span id="sharkAmountValue" class="value-pill">1</span>
+      </label>
+
       <label class="control-row">
         Speed
-        <input id="speedControl" type="range" min="20" max="160" value="100" />
+        <input id="speedControl" type="range" min="1" max="500" value="100" />
         <span id="speedControlValue" class="value-pill">100%</span>
       </label>
 
     </details>
 
+    <!-- Space --><br><!-- Space -->
 
-    <details open>
+    <details id="backgroundSettingsSection" open>
       <summary>🌊 Background</summary>
       <!-- environment controls -->
 
@@ -123,6 +124,27 @@
       </label>
 
     </details>
+
+    <!-- EXPERIMENTAL TAB: -->
+    
+    <!--
+    livingFishAmount
+    livingFishColorMode
+    livingFishBehavior
+    -->
+
+    <!-- Buttons for Apply / Reset :-->
+    <details id="experimentalSettingsSection" class="settings-sector">
+      <summary>🧪 Experimental</summary>
+
+      <label class="control-row">
+        Living Fish Amount
+        <input id="livingFishAmount" type="range" min="0" max="10" value="1" />
+        <span id="livingFishAmountValue" class="value-pill">1</span>
+      </label>
+    </details>
+
+    <!-- Space --><br><!-- Space -->
 
     <div class="settings-actions">
       <button id="applySettings" class="panel-btn" type="button">Apply</button>

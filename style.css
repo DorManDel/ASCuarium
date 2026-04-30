@@ -198,9 +198,11 @@ click -> POP! + returns normal*/
   }
 }
 
-/* ADDED LIVING FISH PROTOTYPE */
+/* ADDED LIVING FISH V1 */
 .ascii-creature {
   position: absolute;
+  width: 150px;
+  height: 44px;
   white-space: pre;
   line-height: 1;
   user-select: none;
@@ -208,56 +210,33 @@ click -> POP! + returns normal*/
   text-shadow: 0 0 12px currentColor;
   will-change: transform;
   z-index: 45;
+  font-size: 22px;
+  filter: drop-shadow(0 0 10px currentColor);
 }
 
 .ascii-creature pre {
+  position: absolute;
   margin: 0;
 }
 
 .creature-body {
-  position: relative;
-  font-size: 22px;
+  left: 42px;
+  top: 10px;
 }
 
 .creature-trail {
-  position: absolute;
-  left: -42px;
-  top: 3px;
+  left: 0;
+  top: 12px;
   opacity: 0.35;
   font-size: 16px;
   animation: trail-fade 1.2s infinite alternate;
 }
 
 .creature-fin {
-  position: absolute;
-  left: 42px;
-  top: 15px;
+  left: 86px;
+  top: 25px;
   font-size: 16px;
   animation: fin-wiggle 0.45s infinite alternate;
-}
-
-.creature-eye {
-  position: absolute;
-  left: 62px;
-  top: 1px;
-  font-size: 12px;
-  animation: eye-blink 4s infinite;
-}
-
-
-@keyframes fin-wiggle {
-  from { transform: rotate(-18deg); }
-  to   { transform: rotate(18deg); }
-}
-
-@keyframes eye-blink {
-  0%, 94%, 100% { opacity: 1; }
-  96% { opacity: 0; }
-}
-
-@keyframes trail-fade {
-  from { opacity: 0.15; transform: translateX(0); }
-  to   { opacity: 0.45; transform: translateX(-6px); }
 }
 
 /* =========================================================

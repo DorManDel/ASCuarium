@@ -20,86 +20,86 @@
    14. Project Start
    ========================================================= */
 
-  /* MAP : */ // (NAVIGATION TRICK):
-  /*
-  =========================================================
-  🔎 Quick jump:
-      Ctrl + Shift + O
-        Then type:
-          #region
-    You can jump anywhere instantly.
-  =========================================================
-  */
- 
-  // #region 01. DOM REFERENCES
-  // all document.getElementById lines
-  // #endregion
+/* MAP : */ // (NAVIGATION TRICK):
+/*
+=========================================================
+🔎 Quick jump:
+    Ctrl + Shift + O
+      Then type:
+        #region
+  You can jump anywhere instantly.
+=========================================================
+*/
 
-  // #region 02. DEFAULT SETTINGS + USER PREFS
-  // DEFAULT_SETTINGS, STORAGE_KEY, save/load prefs
-  // #endregion
+// #region 01. DOM REFERENCES
+// all document.getElementById lines
+// #endregion
 
-  // #region 03. ASCII ART LIBRARY
-  // const ASCII = { ... }
-  // #endregion
+// #region 02. DEFAULT SETTINGS + USER PREFS
+// DEFAULT_SETTINGS, STORAGE_KEY, save/load prefs
+// #endregion
 
-  // #region 04. FISH ARSENAL
-  // const fishArsenal = [ ... ]
-  // #endregion
+// #region 03. ASCII ART LIBRARY
+// const ASCII = { ... }
+// #endregion
 
-  // #region 05. SEAWEED ARSENAL
-  // const seaweedArsenal = [ ... ]
-  // #endregion
+// #region 04. FISH ARSENAL
+// const fishArsenal = [ ... ]
+// #endregion
 
-  // #region 06. HELPERS + FISH PICKER UI
-  // randomBetween, randomInt, pickRandom, updateValueLabels,
-  // renderFishToggleList, loadFishTogglePrefs
-  // #endregion
+// #region 05. SEAWEED ARSENAL
+// const seaweedArsenal = [ ... ]
+// #endregion
 
-  // #region 07. DEPTH + WATER LOGIC
-  // getDepthByStrength, applyWaterTone, getDuration
-  // #endregion
+// #region 06. HELPERS + FISH PICKER UI
+// randomBetween, randomInt, pickRandom, updateValueLabels,
+// renderFishToggleList, loadFishTogglePrefs
+// #endregion
 
-  // #region 08. ASCII ELEMENT FACTORY + PUFFER LOGIC
-  // createAsciiElement
-  // #endregion
+// #region 07. DEPTH + WATER LOGIC
+// getDepthByStrength, applyWaterTone, getDuration
+// #endregion
 
-  // #region 08.5 LIVING FISH PROTOTYPE
-  // createLivingFish
-  // #endregion
+// #region 08. ASCII ELEMENT FACTORY + PUFFER LOGIC
+// createAsciiElement
+// #endregion
 
-  // #region 09. FISH MANAGER
-  // const FishManager = { ... }
-  // #endregion
+// #region 08.5 LIVING FISH PROTOTYPE
+// createLivingFish
+// #endregion
 
-  // #region 10. SEAWEED MANAGER + SAND
-  // SeaweedManager, createSandPatch
-  // #endregion
+// #region 09. FISH MANAGER
+// const FishManager = { ... }
+// #endregion
 
-  // #region 11. BUBBLE MANAGER
-  // createBubble
-  // #endregion
+// #region 10. SEAWEED MANAGER + SAND
+// SeaweedManager, createSandPatch
+// #endregion
 
-  // #region 12. RENDER ENGINE
-  // renderAquarium
-  // #endregion
+// #region 11. BUBBLE MANAGER
+// createBubble
+// #endregion
 
-  // #region 13. SETTINGS EVENTS
-  // open/close/reset/listeners
-  // #endregion
+// #region 12. RENDER ENGINE
+// renderAquarium
+// #endregion
 
-  // #region 14. PROJECT START
-  // loadUserSettings, updateValueLabels, render...
-  // #endregion
+// #region 13. SETTINGS EVENTS
+// open/close/reset/listeners
+// #endregion
+
+// #region 14. PROJECT START
+// loadUserSettings, updateValueLabels, render...
+// #endregion
 
 
 /* =========================================================
    01. DOM REFERENCES
    ========================================================= */
-  
-   // #region 01. DOM REFERENCES
-  // all document.getElementById lines
-  
+
+// #region 01. DOM REFERENCES
+// all document.getElementById lines
+
 const aquarium = document.getElementById("aquarium");
 
 const settingsToggle = document.getElementById("settingsToggle");
@@ -138,15 +138,21 @@ const resetSettings = document.getElementById("resetSettings");
 const seaweedAmountInput = document.getElementById("seaweedAmount");
 const seaweedAmountValue = document.getElementById("seaweedAmountValue");
 
+const livingFishAmountInput = document.getElementById("livingFishAmount");
+const livingFishAmountValue = document.getElementById("livingFishAmountValue");
+
+const fishSettingsSection = document.getElementById("fishSettingsSection");
+const backgroundSettingsSection = document.getElementById("backgroundSettingsSection");
+
 // #endregion
 
 /* =========================================================
    02. DEFAULT SETTINGS
    ========================================================= */
-  
-   // #region 02. DEFAULT SETTINGS + USER PREFS
-  // DEFAULT_SETTINGS, STORAGE_KEY, save/load prefs
-  
+
+// #region 02. DEFAULT SETTINGS + USER PREFS
+// DEFAULT_SETTINGS, STORAGE_KEY, save/load prefs
+
 const DEFAULT_SETTINGS = {
   fishAmount: 12,
   bubbleAmount: 36,
@@ -154,8 +160,10 @@ const DEFAULT_SETTINGS = {
   speed: 100,
   seaweedAmount: 8,
   fishVariety: 15,
-  pufferDelay: 4,
+  pufferSpawnDelay: 0,
+  pufferInflateDelay: 4,
   sharkAmount: 1,
+  livingFishAmount: 1,
   waterTone: 45
 };
 
@@ -176,6 +184,10 @@ function saveUserSettings() {
     waterTone: waterToneInput.value,
     sharkAmount: sharkAmountInput.value,
     pufferSpawnDelay: pufferSpawnDelayInput.value,
+    pufferInflateDelay: pufferInflateDelayInput.value,
+    fishSectionOpen: fishSettingsSection.open,
+    backgroundSectionOpen: backgroundSettingsSection.open,
+    livingFishAmount: livingFishAmountInput.value,
     enabledFishIndexes: getEnabledFishIndexes()
   };
 
@@ -205,6 +217,14 @@ function loadUserSettings() {
   waterToneInput.value = savedSettings.waterTone ?? DEFAULT_SETTINGS.waterTone;
   sharkAmountInput.value = savedSettings.sharkAmount ?? DEFAULT_SETTINGS.sharkAmount;
   pufferSpawnDelayInput.value = savedSettings.pufferSpawnDelay ?? DEFAULT_SETTINGS.pufferSpawnDelay;
+  pufferInflateDelayInput.value =
+    savedSettings.pufferInflateDelay ?? DEFAULT_SETTINGS.pufferInflateDelay;
+  fishSettingsSection.open =
+    savedSettings.fishSectionOpen ?? true;
+  backgroundSettingsSection.open =
+    savedSettings.backgroundSectionOpen ?? true;
+    livingFishAmountInput.value =
+  savedSettings.livingFishAmount ?? DEFAULT_SETTINGS.livingFishAmount;
 
 }
 
@@ -213,10 +233,10 @@ function loadUserSettings() {
 /* =========================================================
    03. ASCII ART LIBRARY
    ========================================================= */
-  
-   // #region 03. ASCII ART LIBRARY
-  // const ASCII = { ... }
-  
+
+// #region 03. ASCII ART LIBRARY
+// const ASCII = { ... }
+
 const ASCII = {
   fishSmall: `><(((º>`,
   fishTiny: `><>`,
@@ -344,7 +364,7 @@ const ASCII = {
 --+--
  / \\`,
   sandPatch: `0o. .o0  ° . 0o.   .o  . °`,
-  
+
   /* Living Fish Prototype */
   livingFishBody: `><(((º>`,
   livingFishTrail: `~~~`,
@@ -366,9 +386,9 @@ const ASCII = {
    behavior = normal / puffer / special
    ========================================================= */
 
-  // #region 04. FISH ARSENAL
-  // const fishArsenal = [ ... ]
-  
+// #region 04. FISH ARSENAL
+// const fishArsenal = [ ... ]
+
 const fishArsenal = [
   {
     name: "Small Fish",
@@ -526,8 +546,21 @@ function updateValueLabels() {
   sharkAmountValue.textContent = sharkAmountInput.value;
   pufferSpawnDelayValue.textContent = `${pufferSpawnDelayInput.value}s`;
   pufferInflateDelayValue.textContent = `${pufferInflateDelayInput.value}s`;
+  livingFishAmountValue.textContent = livingFishAmountInput.value;
 }
 
+/* Added Timer to fix weird Spawn timings bug */
+let activeTimers = [];
+
+function scheduleTimer(callback, delay) {
+  const timerId = setTimeout(callback, delay);
+  activeTimers.push(timerId);
+}
+
+function clearActiveTimers() {
+  activeTimers.forEach(clearTimeout);
+  activeTimers = [];
+}
 
 /* =========================================================
    FISH PICKER UI
@@ -681,10 +714,10 @@ function createAsciiElement(config) {
     }
 
     // Puffer fish Spaen Slider Timeout Calc.
-    /*Before: user-controlled inflate timing
-    After: natural/random behavior (more “alive”) */
-    const delay = randomBetween(2500, 6000); // 2.5s–6s natural timing
-    setTimeout(puffUp, delay + randomBetween(-800, 800));
+    /*Puffer Spawn Delay = when guaranteed puffer appears
+    Puffer Inflate Delay = when it puffs after appearing */
+    const inflateDelay = Number(pufferInflateDelayInput.value) * 1000;
+    setTimeout(puffUp, inflateDelay);
 
     element.addEventListener("click", (event) => {
       event.stopPropagation();
@@ -696,16 +729,14 @@ function createAsciiElement(config) {
   }
 }
 
-  // #region 08.5 LIVING FISH PROTOTYPE
-  // createLivingFish
+// #region 08.5 LIVING FISH PROTOTYPE
+// createLivingFish
 
-/* LIVING FISH PROTOTYPE:
-   Creates one experimental fish made from multiple parts:
-   body + trail + fin + eye.
-*/
-/* LIVING FISH PROTOTYPE:
-   One experimental multi-part fish.
-   Uses a stable body line and small animated parts.
+
+/* LIVING FISH V1:
+   Parent-child ASCII creature.
+   The parent moves.
+   The children stay aligned inside the parent.
 */
 function createLivingFish() {
   const colors = ["tint-cyan", "tint-yellow", "tint-lime", "tint-purple"];
@@ -713,7 +744,7 @@ function createLivingFish() {
 
   const creature = document.createElement("div");
 
-  creature.className = `generated ascii-creature swim-right depth-5 ${color}`;
+  creature.className = `generated ascii-creature swim-right ${color}`;
   creature.style.top = `${randomBetween(18, 72)}vh`;
   creature.style.animationDuration = getDuration(28, 48);
   creature.style.animationDelay = `${randomBetween(-12, 0)}s`;
@@ -726,7 +757,7 @@ function createLivingFish() {
 
   aquarium.appendChild(creature);
 }
-  // #endregion
+// #endregion
 
 // #endregion
 
@@ -745,9 +776,9 @@ function createLivingFish() {
    fish faces right + swims left = needs flip
    fish faces left  + swims left = no flip
    ========================================================= */
-  // #region 09. FISH MANAGER
-  // const FishManager = { ... }
-  
+// #region 09. FISH MANAGER
+// const FishManager = { ... }
+
 
 const FishManager = {
   getRandomSwimDirection() {
@@ -933,6 +964,8 @@ function createBubble() {
 // renderAquarium
 
 function renderAquarium() {
+
+  clearActiveTimers();
   clearGeneratedElements();
   applyWaterTone();
 
@@ -951,7 +984,8 @@ function renderAquarium() {
   Inflate Delay = when it becomes big after spawn */
   const pufferSpawnDelay = Number(pufferSpawnDelayInput.value) * 1000;
 
-  setTimeout(() => {
+  // cahnged timer Mech. :
+  scheduleTimer(() => {
     FishManager.createSpecificFish("Puffer Fish");
   }, pufferSpawnDelay);
 
@@ -968,7 +1002,11 @@ function renderAquarium() {
   }
 
   /* CREATE LIVING FISH PROTOTYPE */
+  const livingFishAmount = Number(livingFishAmountInput.value);
+
+for (let i = 0; i < livingFishAmount; i++) {
   createLivingFish();
+}
 }
 
 // #endregion
@@ -999,6 +1037,9 @@ function resetToDefaults() {
   sharkAmountInput.value = DEFAULT_SETTINGS.sharkAmount;
 
   pufferSpawnDelayInput.value = DEFAULT_SETTINGS.pufferSpawnDelay;
+  pufferInflateDelayInput.value = DEFAULT_SETTINGS.pufferInflateDelay;
+
+  livingFishAmountInput.value = DEFAULT_SETTINGS.livingFishAmount;
 
   localStorage.removeItem(STORAGE_KEY);
 
@@ -1031,6 +1072,10 @@ applySettings.addEventListener("click", () => {
   renderAquarium();
 });
 
+[fishSettingsSection, backgroundSettingsSection].forEach((section) => {
+  section.addEventListener("toggle", saveUserSettings);
+});
+
 /* Listener Array */
 resetSettings.addEventListener("click", resetToDefaults);
 
@@ -1044,6 +1089,7 @@ resetSettings.addEventListener("click", resetToDefaults);
   sharkAmountInput,
   pufferSpawnDelayInput,
   pufferInflateDelayInput,
+  livingFishAmountInput,
   waterToneInput
 ].forEach((input) => {
   input.addEventListener("input", updateValueLabels);
