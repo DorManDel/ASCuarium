@@ -20,7 +20,17 @@
    14. Project Start
    ========================================================= */
 
-  /* MAP : */
+  /* MAP : */ // (NAVIGATION TRICK):
+  /*
+  =========================================================
+  🔎 Quick jump:
+      Ctrl + Shift + O
+        Then type:
+          #region
+    You can jump anywhere instantly.
+  =========================================================
+  */
+ 
   // #region 01. DOM REFERENCES
   // all document.getElementById lines
   // #endregion

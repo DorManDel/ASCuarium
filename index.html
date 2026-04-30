@@ -36,79 +36,93 @@
       </button>
     </div>
 
-    <label class="control-row">
-      Fish Amount
-      <input id="fishAmount" type="range" min="1" max="40" value="12" />
-      <span id="fishAmountValue" class="value-pill">12</span>
-    </label>
-
-    <label class="control-row">
-      Fish Variety
-      <input id="fishVariety" type="range" min="1" max="25" value="15" />
-      <span id="fishVarietyValue" class="value-pill">15</span>
-    </label>
-
-    <!-- Puffer sliders (spawn timing) -->
-    <details class="settings-sector" open>
-      <summary>🐡 Puffer Settings</summary>
+    <details open>
+      <summary>🐠 Fish</summary>
+      <!-- fish controls -->
 
       <label class="control-row">
-        Puffer Spawn Delay
-        <input id="pufferSpawnDelay" type="range" min="0" max="20" value="0" />
-        <span id="pufferSpawnDelayValue" class="value-pill">0s</span>
+        Fish Amount
+        <input id="fishAmount" type="range" min="1" max="40" value="12" />
+        <span id="fishAmountValue" class="value-pill">12</span>
       </label>
 
       <label class="control-row">
-        Puffer Inflate Delay
-        <input id="pufferInflateDelay" type="range" min="1" max="10" value="4" />
-        <span id="pufferInflateDelayValue" class="value-pill">4s</span>
+        Fish Variety
+        <input id="fishVariety" type="range" min="1" max="25" value="15" />
+        <span id="fishVarietyValue" class="value-pill">15</span>
       </label>
+
+      <!-- Puffer sliders (spawn timing) -->
+      <details class="settings-sector" open>
+        <summary>🐡 Puffer Settings</summary>
+
+        <label class="control-row">
+          Puffer Spawn Delay
+          <input id="pufferSpawnDelay" type="range" min="0" max="20" value="0" />
+          <span id="pufferSpawnDelayValue" class="value-pill">0s</span>
+        </label>
+
+        <label class="control-row">
+          Puffer Inflate Delay
+          <input id="pufferInflateDelay" type="range" min="1" max="10" value="4" />
+          <span id="pufferInflateDelayValue" class="value-pill">4s</span>
+        </label>
+      </details>
+
+      <!-- Shark Slider -->
+      <label class="control-row">
+        Shark Amount
+        <input id="sharkAmount" type="range" min="0" max="5" value="1" />
+        <span id="sharkAmountValue" class="value-pill">1</span>
+      </label>
+
+      <details class="fish-picker">
+        <summary>🐠 Choose Fish Types</summary>
+
+        <div id="fishToggleList" class="fish-toggle-list">
+          <!-- JavaScript will inject fish checkboxes here -->
+        </div>
+      </details>
+
+      <label class="control-row">
+        Speed
+        <input id="speedControl" type="range" min="20" max="160" value="100" />
+        <span id="speedControlValue" class="value-pill">100%</span>
+      </label>
+
     </details>
 
-    <!-- Shark Slider -->
-    <label class="control-row">
-      Shark Amount
-      <input id="sharkAmount" type="range" min="0" max="5" value="1" />
-      <span id="sharkAmountValue" class="value-pill">1</span>
-    </label>
 
-    <details class="fish-picker">
-      <summary>🐠 Choose Fish Types</summary>
+    <details open>
+      <summary>🌊 Background</summary>
+      <!-- environment controls -->
 
-      <div id="fishToggleList" class="fish-toggle-list">
-        <!-- JavaScript will inject fish checkboxes here -->
-      </div>
+      <label class="control-row">
+        Bubble Amount
+        <input id="bubbleAmount" type="range" min="5" max="100" value="36" />
+        <span id="bubbleAmountValue" class="value-pill">36</span>
+      </label>
+
+      <label class="control-row">
+        Seaweed Amount
+        <input id="seaweedAmount" type="range" min="2" max="20" value="8" />
+        <span id="seaweedAmountValue" class="value-pill">8</span>
+      </label>
+
+      <label class="control-row">
+        Depth Strength
+        <input id="depthStrength" type="range" min="0" max="100" value="65" />
+        <span id="depthStrengthValue" class="value-pill">65</span>
+      </label>
+
+
+      <label class="control-row">
+        Water Tone
+        <input id="waterTone" type="range" min="0" max="100" value="45" />
+        <span id="waterToneValue" class="value-pill">45</span>
+      </label>
+
     </details>
-
-    <label class="control-row">
-      Bubble Amount
-      <input id="bubbleAmount" type="range" min="5" max="100" value="36" />
-      <span id="bubbleAmountValue" class="value-pill">36</span>
-    </label>
-
-    <label class="control-row">
-      Seaweed Amount
-      <input id="seaweedAmount" type="range" min="2" max="20" value="8" />
-      <span id="seaweedAmountValue" class="value-pill">8</span>
-    </label>
-
-    <label class="control-row">
-      Depth Strength
-      <input id="depthStrength" type="range" min="0" max="100" value="65" />
-      <span id="depthStrengthValue" class="value-pill">65</span>
-    </label>
-
-    <label class="control-row">
-      Speed
-      <input id="speedControl" type="range" min="20" max="160" value="100" />
-      <span id="speedControlValue" class="value-pill">100%</span>
-    </label>
-
-    <label class="control-row">
-      Water Tone
-      <input id="waterTone" type="range" min="0" max="100" value="45" />
-      <span id="waterToneValue" class="value-pill">45</span>
-    </label>
 
     <div class="settings-actions">
       <button id="applySettings" class="panel-btn" type="button">Apply</button>
